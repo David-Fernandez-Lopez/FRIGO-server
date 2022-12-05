@@ -3,37 +3,49 @@ const { Schema, model } = require("mongoose")
 const recipeSchema = new Schema(
   {
     title: {
-      type:String
+      type:String,
+      required: [true, 'Recipe name is required']
     },
     readyInMinutes: {
-      type:Number
+      type:Number,
+      required: [true, 'Cooking time is required.']
     },
     servings: {
-      type:Number
+      type:Number,
+      required: [true, 'Servings amount is required']
     },
     image:{
       type: String,
       default: '/images/recipe-default.png',
       set: value => value === '' ? '/images/recipe-default.png' : value
     },
-    analyzedInstructions: [{
+    instructions:{
+      type: [{
       number: Number,
       step:String
-    }],
+      }],
+      required: [true, 'Recipe should have instructions']
+    },
     cuisines: {
       type: String,
-      enum:['African', 'American', 'British', 'Cajun', 'Caribbean', 'Chinese','Eastern European', 'European', 'French', 'German', 'Greek', 'Indian', 'Irish', 'Italian', 'Japanese', 'Jewish', 'Korean', 'Latin American', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Nordic', 'Southern', 'Spanish', 'Thai', 'Vietnamese']
+      required: [true, 'Cusine is required']
     },
     dishTypes:{
       type: String,
-      enum:['main course', 'side dish', 'dessert', 'appetizer', 'salad', 'bread', 'breakfast', 'soup', 'beverage', 'sauce', 'marinade', 'fingerfood', 'snack', 'drink']
+      required: [true, 'Dish Type is required']
     },
     summary: {
-      type:String
+      type: String,
+      required: [true, 'Summary is required']
     },
-    extendedIngredients:[{
-      name: String
-    }],
+    ingredients: {
+      type: [{
+      name: String,
+      quantity: Number,
+      units: String
+      }],
+      required: [true, 'Recipe should have ingredients, quantity and measure unit.']
+  },
     // rating: {
     //   type: Number,
     //   max: 5,

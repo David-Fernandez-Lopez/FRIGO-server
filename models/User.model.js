@@ -19,7 +19,6 @@ const userSchema = new Schema(
     },
     lastName: {
       type: String,
-      required: [true, 'Lastname is required.']
     },
     profileImg: {
       type: String,
