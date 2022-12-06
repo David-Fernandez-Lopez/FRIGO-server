@@ -6,4 +6,12 @@ module.exports = app => {
     const recipesRouter = require("./recipes.routes")
     app.use("/api/recipes", recipesRouter)
 
+    const cuisinesRouter = require("./cuisines.routes")
+    app.use("/api/cuisines", cuisinesRouter)
+
+    const dishTypesRouter = require("./dishTypes.routes")
+    app.use("/api/dishTypes", dishTypesRouter)
+
+    const uploadRouter = require("./upload.routes")
+    app.use("/api/upload", uploadRouter)
 }

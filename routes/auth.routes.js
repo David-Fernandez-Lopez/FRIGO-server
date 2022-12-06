@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken')
 
 const { isAuthenticated } = require('./../middleware/jwt.middleware')
 
+
 router.post('/signup', (req, res, next) => {
 
   const { email, password, name } = req.body
@@ -43,6 +44,7 @@ router.post('/signup', (req, res, next) => {
       res.status(500).json({ message: "Internal Server Error" })
     })
 })
+
 
 router.post('/login', (req, res, next) => {
 
@@ -83,8 +85,33 @@ router.post('/login', (req, res, next) => {
     .catch(err => {
       console.log(err)
       res.status(500).json({ message: "Internal Server Error" })
-    });
-});
+    })
+})
+
+
+
+
+router.post('/:user_id/edit', (req, res, next) => {
+
+  const { user_id } = req.params
+  
+  const { email, name, lastName, profileImg } = req.body
+
+  User
+    .findByIdAndUpdate(user_id, { email, name, lastName, profileImg }, {new:true})
+    .then((updatedUser) => {
+      
+      const { email, name, _id, lastName, profileImg } = updatedUser
+      const user = { email, name, _id, lastName, profileImg}
+      
+      res.status(201).json({ user })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ message: "Internal Server Error" })
+    })
+})
+
 
 router.get('/verify', isAuthenticated, (req, res) => {
   console.log('entro')
