@@ -1,4 +1,4 @@
-const Recipe = require('../models/DishType.model')
+const Recipe = require('../models/Recipe.model')
 
 
 const getRecipeById =  (req, res, next) => {
