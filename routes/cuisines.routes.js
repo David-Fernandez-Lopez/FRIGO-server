@@ -1,17 +1,9 @@
 const express = require('express')
+const { getCuisines } = require('../controllers/cuisines.controller')
 const router = express.Router()
 
-const Cuisine = require('../models/Cuisine.model')
 
-
-
-router.get('/', (req, res, next) => {
-    
-    Cuisine
-        .find()
-        .then(response => res.json(response))
-        .catch(err => next(err))
-})
+router.get('/', getCuisines)
 
 
 

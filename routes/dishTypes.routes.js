@@ -1,17 +1,9 @@
 const express = require('express')
+const { getDishTypes } = require('../controllers/dishTypes.controller')
 const router = express.Router()
 
-const DishType = require('../models/DishType.model')
 
-
-router.get('/', (req, res, next) => {
-
-    DishType
-        .find()
-        .then(response => res.json(response))
-        .catch(err => next(err))
-})
-
+router.get('/', getDishTypes)
 
 
 module.exports = router
