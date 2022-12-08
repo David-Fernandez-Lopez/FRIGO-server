@@ -1,6 +1,4 @@
 const User = require('../models/User.model')
-const bcrypt = require('bcryptjs')
-const saltRounds = 10
 const jwt = require('jsonwebtoken')
 
 
@@ -8,35 +6,15 @@ const signup =  (req, res, next) => {
 
   const { email, password, name } = req.body
 
-  if (password.length < 2) {
-    res.status(400).json({ errorMessages: 'Password must have at least 3 characters' })
-    return
-  }
-
   User
-    .findOne({ email })
-    .then((foundUser) => {
-
-      if (foundUser) {
-        res.status(400).json({ errorMessages: "Email already exists." })
-        return
-      }
-
-      const salt = bcrypt.genSaltSync(saltRounds)
-      const hashedPassword = bcrypt.hashSync(password, salt)
-
-      return User.create({ email, password: hashedPassword, name })
-    })
+    .create({ email, password: hashedPassword, name })
     .then((createdUser) => {
       const { email, name, _id } = createdUser
       const user = { email, name, _id }
 
       res.status(201).json({ user })
     })
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ errorMessages: "Internal Server Error" })
-    })
+    .catch(err => next(err))
 }
 
 
@@ -76,10 +54,8 @@ const login = (req, res, next) => {
       }
 
     })
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ errorMessages: "Internal Server Error" })
-    })
+    .catch(err => next(err))
+
 }
 
 
@@ -91,15 +67,7 @@ const editProfile =  (req, res, next) => {
 
   
   User
-    .findOne({ email })
-    .then((foundUser) => {
-
-      if (foundUser) {
-        res.status(400).json({ errorMessages: "Email already exists." })
-        return
-      }
-        return User.findByIdAndUpdate(user_id, { email, name, lastName, profileImg }, { new: true })
-    })
+    .findByIdAndUpdate(user_id, { email, name, lastName, profileImg }, { new: true })
     .then((updatedUser) => {
       
       const { email, name, _id, lastName, profileImg } = updatedUser
@@ -107,12 +75,8 @@ const editProfile =  (req, res, next) => {
       
       res.status(201).json({ user })
     })
-    .catch(err => {
-      console.log(err)
-            console.log('aquí')
+    .catch(err => next(err))
 
-      res.status(500).json({ errorMessages: "Internal Server Error" })
-    })
 }
 
 
