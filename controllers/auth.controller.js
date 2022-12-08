@@ -1,5 +1,6 @@
 const User = require('../models/User.model')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
 
 const signup =  (req, res, next) => {
