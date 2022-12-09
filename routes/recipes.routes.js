@@ -1,6 +1,13 @@
 const express = require('express')
-const { getRecipeById, getRecipeByCategory, getRecipeByIngredients, createNewRecipe, editRecipe } = require('../controllers/recipes.controller')
 const router = express.Router()
+
+const {
+    getRecipeById,
+    getRecipeByCategory,
+    getRecipeByIngredients,
+    createNewRecipe,
+    editRecipe
+} = require('../controllers/recipes.controller')
 
 
 router.get('/:recipe_id/information', getRecipeById)
