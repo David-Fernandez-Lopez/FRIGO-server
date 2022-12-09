@@ -1,7 +1,7 @@
 const MeasurementsUnits = require('../models/MeasurementsUnits.model')
 
 
-const getMeasurementsUnitss = (req, res, next) => {
+const getMeasurementsUnits = (req, res, next) => {
 
     MeasurementsUnits
         .find()
@@ -10,5 +10,5 @@ const getMeasurementsUnitss = (req, res, next) => {
 }
 
 module.exports = {
-    getMeasurementsUnitss
+    getMeasurementsUnits
 }
