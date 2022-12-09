@@ -12,6 +12,9 @@ module.exports = app => {
     const dishTypesRouter = require("./dishTypes.routes")
     app.use("/api/dishTypes", dishTypesRouter)
 
+    const measurementsUnitsRouter = require("./measurementsUnits.routes")
+    app.use("/api/measurementsUnits", measurementsUnitsRouter)
+
     const uploadRouter = require("./upload.routes")
     app.use("/api/upload", uploadRouter)
 }

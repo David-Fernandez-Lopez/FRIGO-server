@@ -26,17 +26,17 @@ const getRecipeByIngredients = (req, res, next) => {
     const { ingredients } = req.query
 
     Recipe
-        .find({ "ingredients.name": ingredients })
+        .find({ "extendedIngredients.name": ingredients })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
 
 const createNewRecipe = (req, res, next) => {
 
-    const { title, readyInMinutes, servings, image, instructions, cuisines, dishTypes, summary, ingredients, owner } = req.body
+    const { title, readyInMinutes, servings, image, analyzedInstructions, cuisines, dishTypes, summary, extendedIngredients, owner } = req.body
 
     Recipe
-        .create({ title, readyInMinutes, servings, image, instructions, cuisines, dishTypes, summary, ingredients, owner })
+        .create({ title, readyInMinutes, servings, image, analyzedInstructions, cuisines, dishTypes, summary, extendedIngredients, owner })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -45,10 +45,10 @@ const editRecipe = (req, res, next) => {
 
     const { recipe_id } = req.params
 
-    const { title, readyInMinutes, servings, image, instructions, cuisines, dishTypes, summary, ingredients } = req.body
+    const { title, readyInMinutes, servings, image, analyzedInstructions, cuisines, dishTypes, summary, extendedIngredients } = req.body
 
     Recipe
-        .findByIdAndUpdate(recipe_id, { title, readyInMinutes, servings, image, instructions, cuisines, dishTypes, summary, ingredients })
+        .findByIdAndUpdate(recipe_id, { title, readyInMinutes, servings, image, analyzedInstructions, cuisines, dishTypes, summary, extendedIngredients })
         .then(response => res.json(response))
         .catch(err => next(err))
 }

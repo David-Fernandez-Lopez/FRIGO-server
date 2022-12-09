@@ -3,26 +3,26 @@ const { Schema, model } = require("mongoose")
 const recipeSchema = new Schema(
   {
     title: {
-      type:String,
+      type: String,
       required: [true, 'Recipe name is required']
     },
     readyInMinutes: {
-      type:Number,
+      type: Number,
       required: [true, 'Cooking time is required.']
     },
     servings: {
-      type:Number,
+      type: Number,
       required: [true, 'Servings amount is required']
     },
-    image:{
+    image: {
       type: String,
       default: '/images/recipe-default.png',
       set: value => value === '' ? '/images/recipe-default.png' : value
     },
-    instructions:{
+    analyzedInstructions: {
       type: [{
-      number: Number,
-      step:String
+        number: Number,
+        step: String
       }],
       required: [true, 'Recipe should have instructions']
     },
@@ -30,7 +30,7 @@ const recipeSchema = new Schema(
       type: String,
       required: [true, 'Cusine is required']
     },
-    dishTypes:{
+    dishTypes: {
       type: String,
       required: [true, 'Dish Type is required']
     },
@@ -38,20 +38,20 @@ const recipeSchema = new Schema(
       type: String,
       required: [true, 'Summary is required']
     },
-    ingredients: {
+    extendedIngredients: {
       type: [{
-      name: String,
-      quantity: Number,
-      units: String
+        name: String,
+        amount: Number,
+        unit: String
       }],
-      required: [true, 'Recipe should have ingredients, quantity and measure unit.']
-  },
+      required: [true, 'Recipe should have ingredients, amount and measure unit.']
+    },
     // rating: {
     //   type: Number,
     //   max: 5,
     //   min:0
     // }
-    owner:{
+    owner: {
       type: Schema.Types.ObjectId,
       ref: 'User'
     }
