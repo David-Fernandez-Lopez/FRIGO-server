@@ -26,14 +26,14 @@ const recipeSchema = new Schema(
       }],
       required: [true, 'Recipe should have instructions']
     },
-    cuisines: {
+    cuisines: [{
       type: String,
       required: [true, 'Cusine is required']
-    },
-    dishTypes: {
+    }],
+    dishTypes: [{
       type: String,
       required: [true, 'Dish Type is required']
-    },
+    }],
     summary: {
       type: String,
       required: [true, 'Summary is required']
