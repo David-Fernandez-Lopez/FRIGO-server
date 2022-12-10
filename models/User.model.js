@@ -36,6 +36,11 @@ const userSchema = new Schema(
     },
     favRecipes: [{
       type:String
+    }],
+    shoppingList: [{
+      name: String,
+      amount: Number,
+      unit:String
     }]
   },
   {
