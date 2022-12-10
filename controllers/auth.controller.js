@@ -24,7 +24,7 @@ const login = (req, res, next) => {
   const { email, password } = req.body
 
   if (email === '' || password === '') {
-    res.status(400).json({ errorMessages: "Provide email and password." })
+    res.status(400).json({ errorMessages: ["Provide email and password."] })
     return
   }
 
@@ -33,7 +33,7 @@ const login = (req, res, next) => {
     .then((foundUser) => {
 
       if (!foundUser) {
-        res.status(401).json({ errorMessages: "User not found." })
+        res.status(401).json({ errorMessages: ["User not found."] })
         return
       }
       if (bcrypt.compareSync(password, foundUser.password)) {
