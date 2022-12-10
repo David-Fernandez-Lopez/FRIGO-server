@@ -4,6 +4,7 @@ const { isAuthenticated } = require("../middleware/jwt.middleware")
 
 const {
     getRecipeById,
+    getRecipeByOwner,
     getRecipeByCategory,
     getRecipeByIngredients,
     createNewRecipe,
@@ -11,6 +12,8 @@ const {
 } = require('../controllers/recipes.controller')
 
 router.get('/:recipe_id/information', getRecipeById)
+
+router.get('/findByOwner', isAuthenticated, getRecipeByOwner)
 
 router.get('/complexSearch', getRecipeByCategory)
 

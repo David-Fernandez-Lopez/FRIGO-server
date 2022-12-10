@@ -11,12 +11,23 @@ const getRecipeById = (req, res, next) => {
         .catch(err => next(err))
 }
 
-const getRecipeByCategory = (req, res, next) => {
+const getRecipeByOwner = (req, res, next) => {
 
-    const { category } = req.query
+    const owner = req.payload._id
 
     Recipe
-        .find({ cuisines: { $elemMatch: category } })
+        .find({ 'owner': owner })
+        .sort({ title: 1 })
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
+const getRecipeByCategory = (req, res, next) => {
+
+    const { query } = req.query
+
+    Recipe
+        .find({ 'cuisines': query })
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -95,6 +106,7 @@ const editRecipe = (req,
 
 module.exports = {
     getRecipeById,
+    getRecipeByOwner,
     getRecipeByCategory,
     getRecipeByIngredients,
     createNewRecipe,
