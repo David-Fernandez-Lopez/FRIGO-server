@@ -15,6 +15,9 @@ module.exports = app => {
     const measurementsUnitsRouter = require("./measurementsUnits.routes")
     app.use("/api/measurementsUnits", measurementsUnitsRouter)
 
+    const ingredientsRouter = require("./ingredients.routes")
+    app.use("/api/ingredients", ingredientsRouter)
+
     const uploadRouter = require("./upload.routes")
     app.use("/api/upload", uploadRouter)
 }
