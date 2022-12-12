@@ -3,7 +3,8 @@ const { getUserById,
     addRecipeToFav,
     removeRecipeFromFav,
     addItemToShoppingList,
-    removeItemFromShoppingList
+    removeItemFromShoppingList,
+    getShoppingList
 } = require("../controllers/user.controller")
 const { isAuthenticated } = require('../middleware/jwt.middleware')
 
@@ -24,6 +25,10 @@ router.put('/addItemToShoppingList', isAuthenticated, addItemToShoppingList)
 
 
 router.put('/removeItemFromShoppingList', isAuthenticated, removeItemFromShoppingList)
+
+
+router.get('/getShoppingList', isAuthenticated, getShoppingList)
+
 
 
 module.exports = router

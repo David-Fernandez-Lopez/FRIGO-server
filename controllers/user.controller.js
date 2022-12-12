@@ -107,6 +107,17 @@ const removeItemFromShoppingList = (req, res, next) => {
 
 }
 
+const getShoppingList = (req, res, next) => {
+
+  const user_id = req.payload._id
+
+  User
+    .findById(user_id)
+    .select({shoppingList:1})
+    .then(response => res.json(response))
+    .catch(err => next(err))
+}
+
 
 module.exports = {
   editProfile,
@@ -114,5 +125,6 @@ module.exports = {
   addRecipeToFav,
   removeRecipeFromFav,
   addItemToShoppingList,
-  removeItemFromShoppingList
+  removeItemFromShoppingList,
+  getShoppingList
 }
