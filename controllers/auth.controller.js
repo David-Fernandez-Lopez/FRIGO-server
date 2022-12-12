@@ -51,7 +51,7 @@ const login = (req, res, next) => {
         res.status(200).json({ authToken })
       }
       else {
-        res.status(401).json({ errorMessages: "Unable to authenticate the user" })
+        res.status(401).json({ errorMessages: ["Unable to authenticate the user"] })
       }
 
     })
