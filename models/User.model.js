@@ -35,12 +35,12 @@ const userSchema = new Schema(
       default: 'USER'
     },
     favRecipes: [{
-      type:String
+      type: String
     }],
     shoppingList: [{
       name: String,
       amount: Number,
-      unit:String
+      unit: String
     }]
   },
   {

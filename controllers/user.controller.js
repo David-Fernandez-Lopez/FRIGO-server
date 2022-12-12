@@ -60,8 +60,8 @@ const removeRecipeFromFav = (req, res, next) => {
     .findByIdAndUpdate(user_id, { $pull: { favRecipes } }, { new: true })
     .then((updatedUser) => {
       console.log({ updatedUser })
-      const { email, name, _id, lastName, profileImg, favRecipes } = updatedUser
-      const user = { email, name, _id, lastName, profileImg, favRecipes }
+      const { email, name, _id, lastName, profileImg, favRecipes, shoppingList } = updatedUser
+      const user = { email, name, _id, lastName, profileImg, favRecipes, shoppingList }
 
       res.status(201).json({ user })
     })
@@ -69,9 +69,50 @@ const removeRecipeFromFav = (req, res, next) => {
 
 }
 
+const addItemToShoppingList = (req, res, next) => {
+
+  const user_id = req.payload._id
+
+  const { shoppingList } = req.body
+
+  User
+    .findByIdAndUpdate(user_id, { $addToSet: { shoppingList } }, { new: true })
+    .then((updatedUser) => {
+      console.log({ updatedUser })
+      const { email, name, _id, lastName, profileImg, favRecipes, shoppingList } = updatedUser
+      const user = { email, name, _id, lastName, profileImg, favRecipes, shoppingList }
+
+      res.status(201).json({ user })
+    })
+    .catch(err => next(err))
+
+}
+
+const removeItemFromShoppingList = (req, res, next) => {
+
+  const user_id = req.payload._id
+
+  const { shoppingList } = req.body
+
+  User
+    .findByIdAndUpdate(user_id, { $pull: { shoppingList } }, { new: true })
+    .then((updatedUser) => {
+      console.log({ updatedUser })
+      const { email, name, _id, lastName, profileImg, favRecipes, shoppingList } = updatedUser
+      const user = { email, name, _id, lastName, profileImg, favRecipes, shoppingList }
+
+      res.status(201).json({ user })
+    })
+    .catch(err => next(err))
+
+}
+
+
 module.exports = {
   editProfile,
   getUserById,
   addRecipeToFav,
-  removeRecipeFromFav
+  removeRecipeFromFav,
+  addItemToShoppingList,
+  removeItemFromShoppingList
 }
