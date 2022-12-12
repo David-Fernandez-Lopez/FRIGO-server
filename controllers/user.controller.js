@@ -23,7 +23,7 @@ const editProfile = (req, res, next) => {
 
 }
 
-const getCurrentUserById = (req, res, next) => {
+const getUserById = (req, res, next) => {
 
   const user_id = req.payload._id
 
@@ -71,7 +71,7 @@ const removeRecipeFromFav = (req, res, next) => {
 
 module.exports = {
   editProfile,
-  getCurrentUserById,
+  getUserById,
   addRecipeToFav,
   removeRecipeFromFav
 }
