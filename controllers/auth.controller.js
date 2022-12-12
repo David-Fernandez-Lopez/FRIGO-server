@@ -80,6 +80,46 @@ const editProfile = (req, res, next) => {
 
 }
 
+const addRecipeToFav = (req, res, next) => {
+
+  const user_id = req.payload._id
+
+  console.log(req.body)
+  const { favRecipes } = req.body
+  console.log(favRecipes)
+
+  User
+    .findByIdAndUpdate(user_id, { $addToSet: { favRecipes } })
+    .then((updatedUser) => {
+      console.log({ updatedUser })
+      const { email, name, _id, lastName, profileImg, favRecipes } = updatedUser
+      const user = { email, name, _id, lastName, profileImg, favRecipes }
+
+      res.status(201).json({ user })
+    })
+    .catch(err => next(err))
+
+}
+
+const removeRecipeFromFav = (req, res, next) => {
+
+  const user_id = req.payload._id
+
+  const { favRecipes } = req.body
+
+  User
+    .findByIdAndUpdate(user_id, { $pull: { favRecipes } })
+    .then((updatedUser) => {
+      console.log({ updatedUser })
+      const { email, name, _id, lastName, profileImg, favRecipes } = updatedUser
+      const user = { email, name, _id, lastName, profileImg, favRecipes }
+
+      res.status(201).json({ user })
+    })
+    .catch(err => next(err))
+
+}
+
 
 const verify = (req, res) => {
   res.status(200).json(req.payload)
@@ -90,5 +130,7 @@ module.exports = {
   signup,
   login,
   editProfile,
+  addRecipeToFav,
+  removeRecipeFromFav,
   verify
 }

@@ -72,8 +72,7 @@ const createNewRecipe = (req, res, next) => {
         .catch(err => next(err))
 }
 
-const editRecipe = (req,
-    res, next) => {
+const editRecipe = (req, res, next) => {
 
     const { recipe_id } = req.params
 
