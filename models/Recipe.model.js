@@ -46,11 +46,6 @@ const recipeSchema = new Schema(
       }],
       required: [true, 'Recipe should have ingredients, amount and measure unit.']
     },
-    // rating: {
-    //   type: Number,
-    //   max: 5,
-    //   min:0
-    // }
     owner: {
       type: Schema.Types.ObjectId,
       ref: 'User'
