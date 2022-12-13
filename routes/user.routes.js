@@ -1,5 +1,6 @@
 const router = require("express").Router()
-const { getUserById,
+const { editProfile,
+    getUserById,
     addRecipeToFav,
     removeRecipeFromFav,
     getFavRecipes,
@@ -10,7 +11,7 @@ const { getUserById,
 const { isAuthenticated } = require('../middleware/jwt.middleware')
 
 
-// router.put('/:user_id/edit', editProfile)
+router.put('/edit', isAuthenticated, editProfile)
 
 
 router.get('/getUserById', isAuthenticated, getUserById)
@@ -27,7 +28,6 @@ router.get('/getFavRecipes', isAuthenticated, getFavRecipes)
 
 
 router.put('/addItemsToShoppingList', isAuthenticated, addItemsToShoppingList)  //ruta para añadir todos los elementos de golpe
-
 
 
 

@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 
 const editProfile = (req, res, next) => {
 
-  const { user_id } = req.params
+  const { user_id } = req.payload._id
 
   const { email, name, lastName, profileImg } = req.body
 
@@ -14,8 +14,8 @@ const editProfile = (req, res, next) => {
     .findByIdAndUpdate(user_id, { email, name, lastName, profileImg }, { new: true })
     .then((updatedUser) => {
 
-      const { email, name, _id, lastName, profileImg } = updatedUser
-      const user = { email, name, _id, lastName, profileImg }
+      const { email, name, _id, lastName, profileImg, favRecipes, shoppingList } = updatedUser
+      const user = { email, name, _id, lastName, profileImg, favRecipes, shoppingList }
 
       res.status(201).json({ user })
     })
@@ -41,8 +41,8 @@ const addRecipeToFav = (req, res, next) => {
   User
     .findByIdAndUpdate(user_id, { $addToSet: { favRecipes } }, { new: true })
     .then((updatedUser) => {
-      const { email, name, _id, lastName, profileImg, favRecipes } = updatedUser
-      const user = { email, name, _id, lastName, profileImg, favRecipes }
+      const { email, name, _id, lastName, profileImg, favRecipes, shoppingList } = updatedUser
+      const user = { email, name, _id, lastName, profileImg, favRecipes, shoppingList }
 
       res.status(201).json({ user })
     })

@@ -8,7 +8,8 @@ const {
     getRecipeByCategory,
     getRecipeByIngredients,
     createNewRecipe,
-    editRecipe
+    editRecipe,
+    deleteRecipe
 } = require('../controllers/recipes.controller')
 
 router.get('/:recipe_id/information', getRecipeById)
@@ -22,5 +23,7 @@ router.get('/findByIngredients', getRecipeByIngredients)
 router.post('/create', isAuthenticated, createNewRecipe)
 
 router.post('/:recipe_id/edit', editRecipe)
+
+router.delete('/:recipe_id/deleteRecipe/', isAuthenticated, deleteRecipe)
 
 module.exports = router
