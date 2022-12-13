@@ -69,6 +69,10 @@ const removeRecipeFromFav = (req, res, next) => {
 
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 const getFavRecipes = (req, res, next) => {
 
   const user_id = req.payload._id
@@ -80,14 +84,18 @@ const getFavRecipes = (req, res, next) => {
     .catch(err => next(err))
 }
 
+<<<<<<< HEAD
 const addItemToShoppingList = (req, res, next) => {
+=======
+const addItemsToShoppingList = (req, res, next) => {
+>>>>>>> main
 
   const user_id = req.payload._id
 
   const { shoppingList } = req.body
 
   User
-    .findByIdAndUpdate(user_id, { $addToSet: { shoppingList } }, { new: true })
+    .findByIdAndUpdate(user_id, { shoppingList }, { new: true })
     .then((updatedUser) => {
       console.log({ updatedUser })
       const { email, name, _id, lastName, profileImg, favRecipes, shoppingList } = updatedUser
@@ -136,7 +144,11 @@ module.exports = {
   addRecipeToFav,
   removeRecipeFromFav,
   getFavRecipes,
+<<<<<<< HEAD
   addItemToShoppingList,
+=======
+>>>>>>> main
   removeItemFromShoppingList,
-  getShoppingList
+  getShoppingList,
+  addItemsToShoppingList
 }
