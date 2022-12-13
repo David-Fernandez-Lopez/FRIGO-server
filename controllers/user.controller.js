@@ -69,10 +69,7 @@ const removeRecipeFromFav = (req, res, next) => {
 
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 const getFavRecipes = (req, res, next) => {
 
   const user_id = req.payload._id
@@ -84,11 +81,7 @@ const getFavRecipes = (req, res, next) => {
     .catch(err => next(err))
 }
 
-<<<<<<< HEAD
-const addItemToShoppingList = (req, res, next) => {
-=======
 const addItemsToShoppingList = (req, res, next) => {
->>>>>>> main
 
   const user_id = req.payload._id
 
@@ -144,10 +137,6 @@ module.exports = {
   addRecipeToFav,
   removeRecipeFromFav,
   getFavRecipes,
-<<<<<<< HEAD
-  addItemToShoppingList,
-=======
->>>>>>> main
   removeItemFromShoppingList,
   getShoppingList,
   addItemsToShoppingList

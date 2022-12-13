@@ -3,10 +3,6 @@ const { getUserById,
     addRecipeToFav,
     removeRecipeFromFav,
     getFavRecipes,
-<<<<<<< HEAD
-    addItemToShoppingList,
-=======
->>>>>>> main
     removeItemFromShoppingList,
     getShoppingList,
     addItemsToShoppingList
@@ -29,13 +25,15 @@ router.put('/removeRecipeFromFav', isAuthenticated, removeRecipeFromFav)
 router.get('/getFavRecipes', isAuthenticated, getFavRecipes)
 
 
-<<<<<<< HEAD
-=======
+
 router.put('/addItemsToShoppingList', isAuthenticated, addItemsToShoppingList)  //ruta para añadir todos los elementos de golpe
 
 
->>>>>>> main
-router.put('/addItemToShoppingList', isAuthenticated, addItemToShoppingList)
+
+
+
+router.put('/addItemsToShoppingList', isAuthenticated, addItemsToShoppingList)
+
 
 
 router.put('/removeItemFromShoppingList', isAuthenticated, removeItemFromShoppingList)
