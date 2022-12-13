@@ -25,7 +25,15 @@ router.put('/removeRecipeFromFav', isAuthenticated, removeRecipeFromFav)
 router.get('/getFavRecipes', isAuthenticated, getFavRecipes)
 
 
-router.put('/addItemsToShoppingList', isAuthenticated, addItemsToShoppingList) 
+
+router.put('/addItemsToShoppingList', isAuthenticated, addItemsToShoppingList)  //ruta para añadir todos los elementos de golpe
+
+
+
+
+
+router.put('/addItemsToShoppingList', isAuthenticated, addItemsToShoppingList)
+
 
 
 router.put('/removeItemFromShoppingList', isAuthenticated, removeItemFromShoppingList)
