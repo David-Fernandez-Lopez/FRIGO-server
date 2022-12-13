@@ -2,7 +2,7 @@ const router = require("express").Router()
 const { getUserById,
     addRecipeToFav,
     removeRecipeFromFav,
-    // addItemToShoppingList,
+    getFavRecipes,
     removeItemFromShoppingList,
     getShoppingList,
     addItemsToShoppingList
@@ -22,10 +22,13 @@ router.put('/addRecipeToFav', isAuthenticated, addRecipeToFav)
 router.put('/removeRecipeFromFav', isAuthenticated, removeRecipeFromFav)
 
 
-// router.put('/addItemToShoppingList', isAuthenticated, addItemToShoppingList)
+router.get('/getFavRecipes', isAuthenticated, getFavRecipes)
 
 
 router.put('/addItemsToShoppingList', isAuthenticated, addItemsToShoppingList)  //ruta para añadir todos los elementos de golpe
+
+
+router.put('/addItemToShoppingList', isAuthenticated, addItemToShoppingList)
 
 
 router.put('/removeItemFromShoppingList', isAuthenticated, removeItemFromShoppingList)
