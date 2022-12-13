@@ -103,11 +103,22 @@ const editRecipe = (req, res, next) => {
         .catch(err => next(err))
 }
 
+const deleteRecipe = (req, res, next) => {
+
+    const { recipe_id } = req.params
+
+    Recipe
+        .findByIdAndDelete(recipe_id)
+        .then(response => res.json(response))
+        .catch(err => next(err))
+}
+
 module.exports = {
     getRecipeById,
     getRecipeByOwner,
     getRecipeByCategory,
     getRecipeByIngredients,
     createNewRecipe,
-    editRecipe
+    editRecipe,
+    deleteRecipe
 }
