@@ -69,7 +69,6 @@ const removeRecipeFromFav = (req, res, next) => {
 
 }
 
-
 const getFavRecipes = (req, res, next) => {
 
   const user_id = req.payload._id
@@ -137,7 +136,7 @@ module.exports = {
   addRecipeToFav,
   removeRecipeFromFav,
   getFavRecipes,
+  addItemsToShoppingList,
   removeItemFromShoppingList,
-  getShoppingList,
-  addItemsToShoppingList
+  getShoppingList
 }
