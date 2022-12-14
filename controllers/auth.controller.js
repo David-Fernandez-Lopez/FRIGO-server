@@ -33,7 +33,7 @@ const login = (req, res, next) => {
     .then((foundUser) => {
 
       if (!foundUser) {
-        res.status(401).json({ errorMessages: ["User not found."] })
+        res.status(401).json({ errorMessages: ["Email or password are incorrect."] })
         return
       }
       if (bcrypt.compareSync(password, foundUser.password)) {
@@ -51,7 +51,7 @@ const login = (req, res, next) => {
         res.status(200).json({ authToken })
       }
       else {
-        res.status(401).json({ errorMessages: ["Unable to authenticate the user"] })
+        res.status(401).json({ errorMessages: ["Email or password are incorrect"] })
       }
 
     })

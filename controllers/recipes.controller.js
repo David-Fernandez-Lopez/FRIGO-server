@@ -32,6 +32,16 @@ const getRecipeByCategory = (req, res, next) => {
         .catch(err => next(err))
 }
 
+const getRecipeByTitle = (req, res, next) => {
+
+    const { title } = req.query
+
+    Recipe
+        .find({ 'title': { $regex: `(?i)${title}` } })
+        .then(response => { res.json(response) })
+        .catch(err => next(err))
+}
+
 const getRecipeByIngredients = (req, res, next) => {
 
     const { ingredients } = req.query
@@ -117,6 +127,7 @@ module.exports = {
     getRecipeById,
     getRecipeByOwner,
     getRecipeByCategory,
+    getRecipeByTitle,
     getRecipeByIngredients,
     createNewRecipe,
     editRecipe,
