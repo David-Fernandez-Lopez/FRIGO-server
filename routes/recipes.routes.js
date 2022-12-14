@@ -6,6 +6,7 @@ const {
     getRecipeById,
     getRecipeByOwner,
     getRecipeByCategory,
+    getRecipeByTitle,
     getRecipeByIngredients,
     createNewRecipe,
     editRecipe,
@@ -17,6 +18,8 @@ router.get('/:recipe_id/information', getRecipeById)
 router.get('/findByOwner', isAuthenticated, getRecipeByOwner)
 
 router.get('/complexSearch', getRecipeByCategory)
+
+router.get('/findByTitle', getRecipeByTitle)
 
 router.get('/findByIngredients', getRecipeByIngredients)
 
