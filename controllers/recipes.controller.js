@@ -28,6 +28,7 @@ const getRecipeByCategory = (req, res, next) => {
 
     Recipe
         .find({ 'cuisines': query })
+        .limit(5)
         .then(response => res.json(response))
         .catch(err => next(err))
 }

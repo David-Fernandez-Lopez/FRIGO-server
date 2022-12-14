@@ -30,103 +30,37 @@ const login = (req, res, next) => {
 
   User
     .findOne({ email })
-    .then((foundUser) => {
-
-      if (!foundUser) {
-        res.status(401).json({ errorMessages: ["Email or password are incorrect."] })
-        return
-      }
-      if (bcrypt.compareSync(password, foundUser.password)) {
-
-        const { _id, email, name, profileImg, lastName, role, favRecipes, shoppingList } = foundUser
-
-        const payload = { _id, email, name, profileImg, lastName, role, favRecipes, shoppingList }
-
-        const authToken = jwt.sign(
-          payload,
-          process.env.TOKEN_SECRET,
-          { algorithm: 'HS256', expiresIn: "6h" }
-        )
-
-        res.status(200).json({ authToken })
+    .then(foundUser => {
+      if (!foundUser || foundUser.validatePassword(password)) {
+        res.status(200).json({ authToken: foundUser.signToken() })
       }
       else {
-        res.status(401).json({ errorMessages: ["Email or password are incorrect"] })
+        res.status(401).json({ messages: ["Email or password are incorrect"] })
       }
-
     })
     .catch(err => next(err))
-
 }
-
-
-const editProfile = (req, res, next) => {
-
-  const { user_id } = req.params
-
-  const { email, name, lastName, profileImg } = req.body
-
-
-  User
-    .findByIdAndUpdate(user_id, { email, name, lastName, profileImg }, { new: true })
-    .then((updatedUser) => {
-
-      const { email, name, _id, lastName, profileImg } = updatedUser
-      const user = { email, name, _id, lastName, profileImg }
-
-      res.status(201).json({ user })
-    })
-    .catch(err => next(err))
-
-}
-
-const addRecipeToFav = (req, res, next) => {
-
-  const user_id = req.payload._id
-  const { favRecipes } = req.body
-
-  User
-    .findByIdAndUpdate(user_id, { $addToSet: { favRecipes } }, { new: true })
-    .then((updatedUser) => {
-      const { email, name, _id, lastName, profileImg, favRecipes } = updatedUser
-      const user = { email, name, _id, lastName, profileImg, favRecipes }
-
-      res.status(201).json({ user })
-    })
-    .catch(err => next(err))
-
-}
-
-const removeRecipeFromFav = (req, res, next) => {
-
-  const user_id = req.payload._id
-
-  const { favRecipes } = req.body
-
-  User
-    .findByIdAndUpdate(user_id, { $pull: { favRecipes } }, { new: true })
-    .then((updatedUser) => {
-      console.log({ updatedUser })
-      const { email, name, _id, lastName, profileImg, favRecipes } = updatedUser
-      const user = { email, name, _id, lastName, profileImg, favRecipes }
-
-      res.status(201).json({ user })
-    })
-    .catch(err => next(err))
-
-}
-
 
 const verify = (req, res) => {
   res.status(200).json(req.payload)
 }
 
+const updateToken = (req, res, next) => {
+
+  const user_id = req.payload._id
+
+  User
+    .findById(user_id)
+    .then(user => {
+      const token = user.signToken()
+      res.json(token)
+    })
+    .catch(err => next(err))
+}
 
 module.exports = {
   signup,
   login,
-  editProfile,
-  addRecipeToFav,
-  removeRecipeFromFav,
-  verify
+  verify,
+  updateToken
 }
