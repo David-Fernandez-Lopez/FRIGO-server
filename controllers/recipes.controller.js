@@ -27,8 +27,7 @@ const getRecipeByCategory = (req, res, next) => {
     const { query } = req.query
 
     Recipe
-        .find({ 'cuisines': query })
-        .limit(5)
+        .aggregate([{ $match: { 'cuisines': query } }, { $sample: { size: 5 } }])
         .then(response => res.json(response))
         .catch(err => next(err))
 }
