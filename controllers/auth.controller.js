@@ -35,7 +35,7 @@ const login = (req, res, next) => {
         res.status(200).json({ authToken: foundUser.signToken() })
       }
       else {
-        res.status(401).json({ messages: ["Email or password are incorrect"] })
+        res.status(401).json({ errorMessages: ["Email or password are incorrect"] })
       }
     })
     .catch(err => next(err))
