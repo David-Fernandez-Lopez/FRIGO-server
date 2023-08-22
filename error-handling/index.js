@@ -1,9 +1,9 @@
 module.exports = (app) => {
-  app.use((req, res, next) => {
+  app.use((res) => {
     res.status(404).json({ message: "This route does not exist" })
   })
 
-  app.use((err, req, res, next) => {
+  app.use((err, req, res) => {
 
     if (err.code && err.code === 11000) {
       res.status(409).json({ errorMessages: ['The record is already present in the database'] })

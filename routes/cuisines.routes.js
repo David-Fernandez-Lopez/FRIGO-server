@@ -6,5 +6,4 @@ const router = express.Router()
 router.get('/', getCuisines)
 
 
-
 module.exports = router

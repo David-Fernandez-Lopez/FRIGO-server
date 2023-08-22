@@ -1,7 +1,7 @@
 const MeasurementsUnits = require('../models/MeasurementsUnits.model')
 
 
-const getMeasurementsUnits = (req, res, next) => {
+const getMeasurementsUnits = (req,res, next) => {
 
     MeasurementsUnits
         .find()
